@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:myapp/viewmodels/task_viewmodels.dart';
 
 class CreateTaskScreen extends ConsumerStatefulWidget {
-  const CreateTaskScreen({Key? key}) : super(key: key);
+  const CreateTaskScreen({super.key});
 
   @override
   ConsumerState<CreateTaskScreen> createState() => _CreateTaskScreenState();
