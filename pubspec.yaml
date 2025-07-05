@@ -1,0 +1,61 @@
+name: myapp
+description: "A new Flutter project."
+publish_to: 'none' # Prevents accidental publishing to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.0-278.1.beta
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # UI
+  cupertino_icons: ^1.0.8
+
+  # State management & DI
+  flutter_riverpod: ^2.6.1
+
+  # Networking
+  dio: ^5.8.0+1
+
+  # JSON serialization
+  freezed_annotation: ^2.0.0
+  json_serializable: ^6.0.0
+
+  # Navigation
+  go_router: ^6.0.0
+  flutter_secure_storage: ^8.0.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+  # Code generation
+  build_runner: ^2.5.4
+  freezed: ^2.0.0
+  mockito: ^5.0.0
+
+  # Linting
+  flutter_lints: ^5.0.0
+
+  # Native splash generator
+  flutter_native_splash: ^2.4.6
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/splash_logo.png
+
+flutter_native_splash:
+  color: "#0066CC"              # Your brand color
+  image: assets/images/logo.png # Your splash logo
+  android: true
+  ios: true
+  web: false
+
