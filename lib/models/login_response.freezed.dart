@@ -28,9 +28,7 @@ mixin _$LoginResponse {
   String get lastName => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
-  @JsonKey(name: 'accessToken')
   String get accessToken => throw _privateConstructorUsedError;
-  @JsonKey(name: 'refreshToken')
   String get refreshToken => throw _privateConstructorUsedError;
 
   /// Serializes this LoginResponse to a JSON map.
@@ -58,8 +56,8 @@ abstract class $LoginResponseCopyWith<$Res> {
     String lastName,
     String gender,
     String image,
-    @JsonKey(name: 'accessToken') String accessToken,
-    @JsonKey(name: 'refreshToken') String refreshToken,
+    String accessToken,
+    String refreshToken,
   });
 }
 
@@ -149,8 +147,8 @@ abstract class _$$LoginResponseImplCopyWith<$Res>
     String lastName,
     String gender,
     String image,
-    @JsonKey(name: 'accessToken') String accessToken,
-    @JsonKey(name: 'refreshToken') String refreshToken,
+    String accessToken,
+    String refreshToken,
   });
 }
 
@@ -232,8 +230,8 @@ class _$LoginResponseImpl implements _LoginResponse {
     required this.lastName,
     required this.gender,
     required this.image,
-    @JsonKey(name: 'accessToken') required this.accessToken,
-    @JsonKey(name: 'refreshToken') required this.refreshToken,
+    required this.accessToken,
+    required this.refreshToken,
   });
 
   factory _$LoginResponseImpl.fromJson(Map<String, dynamic> json) =>
@@ -254,10 +252,8 @@ class _$LoginResponseImpl implements _LoginResponse {
   @override
   final String image;
   @override
-  @JsonKey(name: 'accessToken')
   final String accessToken;
   @override
-  @JsonKey(name: 'refreshToken')
   final String refreshToken;
 
   @override
@@ -324,8 +320,8 @@ abstract class _LoginResponse implements LoginResponse {
     required final String lastName,
     required final String gender,
     required final String image,
-    @JsonKey(name: 'accessToken') required final String accessToken,
-    @JsonKey(name: 'refreshToken') required final String refreshToken,
+    required final String accessToken,
+    required final String refreshToken,
   }) = _$LoginResponseImpl;
 
   factory _LoginResponse.fromJson(Map<String, dynamic> json) =
@@ -346,10 +342,8 @@ abstract class _LoginResponse implements LoginResponse {
   @override
   String get image;
   @override
-  @JsonKey(name: 'accessToken')
   String get accessToken;
   @override
-  @JsonKey(name: 'refreshToken')
   String get refreshToken;
 
   /// Create a copy of LoginResponse

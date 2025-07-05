@@ -1,6 +1,5 @@
+// lib/viewmodels/task_viewmodels.dart
 
-
-import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myapp/Providers/repository_providers.dart';
@@ -19,11 +18,10 @@ class TaskState with _$TaskState {
 
 class TaskViewModel extends StateNotifier<TaskState> {
   TaskViewModel(this._repo) : super(const TaskState.idle());
+
   final TaskRepository _repo;
 
-
-  bool _isLocal(Task task) => task.id > 150;
-
+  /// Load all tasks from the server.
   Future<void> loadTasks() async {
     state = const TaskState.loading();
     try {
@@ -34,40 +32,34 @@ class TaskViewModel extends StateNotifier<TaskState> {
     }
   }
 
+  /// Optimistically toggle a task’s completed flag,
+  /// then persist it to the server.
   Future<void> toggleComplete(Task task) async {
     final current = state;
     if (current is Data) {
-      
+      // immediately update UI
       state = TaskState.data(current.tasks.map((t) {
         if (t.id == task.id) {
-          return task.copyWith(completed: !t.completed);
+          return t.copyWith(completed: !t.completed);
         }
         return t;
       }).toList());
     }
-
     try {
-      
-      if (!_isLocal(task)) {
-        await _repo.toggleTaskComplete(task);
-      }
-    } on DioException catch (e) {
-      
-      if (e.response?.statusCode != 404) {
-        state = TaskState.error(e.toString());
-      }
+      await _repo.toggleTaskComplete(task);
+    } catch (e) {
+      state = TaskState.error(e.toString());
     }
   }
 
+  /// Create a new task on the server, then prepend it locally.
   Future<void> addTask(String title) async {
     final current = state;
     state = const TaskState.loading();
-
     try {
-      
+      // 1) create on server
       final newTask = await _repo.addTask(title);
-
-     
+      // 2) merge into existing list
       if (current is Data) {
         state = TaskState.data([newTask, ...current.tasks]);
       } else {
@@ -78,25 +70,18 @@ class TaskViewModel extends StateNotifier<TaskState> {
     }
   }
 
+  /// Delete locally (optimistic) and then on the server.
   Future<void> deleteTask(int id) async {
     final current = state;
     if (current is Data) {
-      
       state = TaskState.data(
         current.tasks.where((t) => t.id != id).toList(),
       );
     }
-
     try {
-      
-      if (id <= 150) {
-        await _repo.deleteTask(id);
-      }
-    } on DioException catch (e) {
-      
-      if (e.response?.statusCode != 404) {
-        state = TaskState.error(e.toString());
-      }
+      await _repo.deleteTask(id);
+    } catch (e) {
+      state = TaskState.error(e.toString());
     }
   }
 }
@@ -104,5 +89,7 @@ class TaskViewModel extends StateNotifier<TaskState> {
 final taskVMProvider =
     StateNotifierProvider<TaskViewModel, TaskState>((ref) {
   final repo = ref.read(taskRepoProvider);
-  return TaskViewModel(repo)..loadTasks();
+  return TaskViewModel(repo)
+    // load tasks as soon as the provider is created:
+    ..loadTasks();
 });

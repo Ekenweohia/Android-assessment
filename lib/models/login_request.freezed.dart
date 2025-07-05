@@ -21,8 +21,7 @@ LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LoginRequest {
-  String get username =>
-      throw _privateConstructorUsedError; // DummyJSON expects “username”
+  String get username => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
 
   /// Serializes this LoginRequest to a JSON map.
@@ -127,7 +126,6 @@ class _$LoginRequestImpl implements _LoginRequest {
 
   @override
   final String username;
-  // DummyJSON expects “username”
   @override
   final String password;
 
@@ -175,7 +173,7 @@ abstract class _LoginRequest implements LoginRequest {
       _$LoginRequestImpl.fromJson;
 
   @override
-  String get username; // DummyJSON expects “username”
+  String get username;
   @override
   String get password;
 

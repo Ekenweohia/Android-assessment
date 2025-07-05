@@ -21,12 +21,11 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Task {
-  int get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'todo')
+  int get id => throw _privateConstructorUsedError; // <------- here
+  @JsonKey(name: 'todo', defaultValue: '')
   String get title => throw _privateConstructorUsedError;
   bool get completed => throw _privateConstructorUsedError;
-  int get userId =>
-      throw _privateConstructorUsedError; // Optional fields returned on delete:
+  int get userId => throw _privateConstructorUsedError;
   bool? get isDeleted => throw _privateConstructorUsedError;
   DateTime? get deletedOn => throw _privateConstructorUsedError;
 
@@ -46,7 +45,7 @@ abstract class $TaskCopyWith<$Res> {
   @useResult
   $Res call({
     int id,
-    @JsonKey(name: 'todo') String title,
+    @JsonKey(name: 'todo', defaultValue: '') String title,
     bool completed,
     int userId,
     bool? isDeleted,
@@ -118,7 +117,7 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
   @useResult
   $Res call({
     int id,
-    @JsonKey(name: 'todo') String title,
+    @JsonKey(name: 'todo', defaultValue: '') String title,
     bool completed,
     int userId,
     bool? isDeleted,
@@ -181,7 +180,7 @@ class __$$TaskImplCopyWithImpl<$Res>
 class _$TaskImpl implements _Task {
   _$TaskImpl({
     required this.id,
-    @JsonKey(name: 'todo') required this.title,
+    @JsonKey(name: 'todo', defaultValue: '') required this.title,
     required this.completed,
     required this.userId,
     this.isDeleted,
@@ -193,14 +192,14 @@ class _$TaskImpl implements _Task {
 
   @override
   final int id;
+  // <------- here
   @override
-  @JsonKey(name: 'todo')
+  @JsonKey(name: 'todo', defaultValue: '')
   final String title;
   @override
   final bool completed;
   @override
   final int userId;
-  // Optional fields returned on delete:
   @override
   final bool? isDeleted;
   @override
@@ -256,7 +255,7 @@ class _$TaskImpl implements _Task {
 abstract class _Task implements Task {
   factory _Task({
     required final int id,
-    @JsonKey(name: 'todo') required final String title,
+    @JsonKey(name: 'todo', defaultValue: '') required final String title,
     required final bool completed,
     required final int userId,
     final bool? isDeleted,
@@ -266,14 +265,14 @@ abstract class _Task implements Task {
   factory _Task.fromJson(Map<String, dynamic> json) = _$TaskImpl.fromJson;
 
   @override
-  int get id;
+  int get id; // <------- here
   @override
-  @JsonKey(name: 'todo')
+  @JsonKey(name: 'todo', defaultValue: '')
   String get title;
   @override
   bool get completed;
   @override
-  int get userId; // Optional fields returned on delete:
+  int get userId;
   @override
   bool? get isDeleted;
   @override

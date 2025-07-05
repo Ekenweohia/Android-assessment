@@ -6,10 +6,14 @@ part 'task.g.dart';
 class Task with _$Task {
   factory Task({
     required int id,
+
+    // <------- here
+    @JsonKey(name: 'todo', defaultValue: '')
     required String title,
+
     required bool completed,
     required int userId,
-    
+
     bool? isDeleted,
     DateTime? deletedOn,
   }) = _Task;

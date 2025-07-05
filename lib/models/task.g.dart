@@ -8,7 +8,7 @@ part of 'task.dart';
 
 _$TaskImpl _$$TaskImplFromJson(Map<String, dynamic> json) => _$TaskImpl(
   id: (json['id'] as num).toInt(),
-  title: json['todo'] as String,
+  title: json['todo'] as String? ?? '',
   completed: json['completed'] as bool,
   userId: (json['userId'] as num).toInt(),
   isDeleted: json['isDeleted'] as bool?,
